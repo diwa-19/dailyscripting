@@ -1,0 +1,5 @@
+apt-get install ufw -y
+ufw allow OpenSSH
+ufw allow 5902/tcp
+ufw allow 161/udp
+ufw enable
