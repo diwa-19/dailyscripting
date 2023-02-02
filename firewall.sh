@@ -2,6 +2,7 @@
 read -p "Please input your apache2 port : " phttp
 
 ufw reset
+yes | reset-configure-ufw
 ufw allow 232/tcp
 ufw allow 161/udp
 ufw allow from 103.18.133.200 to any port $phttp
