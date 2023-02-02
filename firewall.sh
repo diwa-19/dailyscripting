@@ -1,6 +1,19 @@
 #!/bin/bash
+#configure network
+read -P "Please input your IP address : " pip
+sed '6d' /etc/netplan/00-installer-config.yaml >> /etc/netplan/00.temp
+cp /etc/netplan/00.temp /etc/netplan/00-installer-config.yaml
+rm /etc/netplan/00.temp
+sed -i '6i\      - '$pip'/24' /etc/netplan/00-installer-config.yaml
+netplan try
+yes | netplan-try
+netplan apply
+yes | netplan-apply
+#configure apache & firewall
 read -p "Please input your apache2 port : " phttp
-
+sed -i '/Listen 96/d' /etc/apache2/ports.conf
+sed -i '5i\Listen '$phttp /etc/apache2/ports.conf
+service apache2 restart
 ufw reset
 yes | reset-configure-ufw
 ufw allow 232/tcp
