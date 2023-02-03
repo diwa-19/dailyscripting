@@ -20,12 +20,12 @@ sed -i '5i\Listen '$phttp /etc/apache2/ports.conf
 service apache2 restart
 echo "Configure Apache success"
 yes | ufw reset
-ufw allow 232/tcp
 ufw allow 161/udp
 ufw allow from 103.18.133.200 to any port $phttp
 ufw allow from 103.18.133.200 to any port 3306
 ufw allow from 103.18.132.207 to any port $phttp
 ufw allow from 103.18.132.207 to any port 3306
+ufw allow from 103.18.132.207 to any port 232
 ufw reload
 yes | ufw enable > /dev/null 2>&1
 echo "Configure Firewall success, now your port is : SSH(232/tcp), SNMP(161/udp), HTTP("$phttp"/tcp), MYSQL(3306)"
