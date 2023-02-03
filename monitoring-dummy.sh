@@ -8,6 +8,9 @@ rm /etc/netplan/00.temp
 sed -i '6i\      - '$pip'/24' /etc/netplan/00-installer-config.yaml
 yes | netplan try > /dev/null 2>&1
 yes | netplan apply > /dev/null 2>&1
+echo ""
+read -p "Please enable your backend connection, and then press any key to continue"
+echo ""
 echo "Configure netplan success"
 #configure apache & firewall
 read -p "Please input your apache2 port : " phttp
